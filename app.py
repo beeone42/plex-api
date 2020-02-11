@@ -20,6 +20,10 @@ def open_and_load_config():
 def hello():
     return "Plex API"
 
+@route('/load')
+def load():
+    return "%s, %s, %s" % os.getloadavg()
+
 @route('/<key>/reboot')
 def pull(key):
     if (key != config["key"]):
@@ -29,7 +33,7 @@ def pull(key):
     return "ok"
 
 @route('/<key>/restart')
-def pull(key):
+def restart(key):
     if (key != config["key"]):
         return "ko"
     os.chdir(config["path"]);
@@ -37,7 +41,7 @@ def pull(key):
     return "ok"
 
 @route('/<key>/update')
-def pull(key):
+def update(key):
     if (key != config["key"]):
         return "ko"
     os.chdir(config["path"]);
