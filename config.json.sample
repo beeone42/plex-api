@@ -1,0 +1,7 @@
+{
+    "path":"/home/user/plex-api/",
+    "key":"change-me",
+    "host":"localhost",
+    "port":"8080",
+    "debug":"True"
+}
