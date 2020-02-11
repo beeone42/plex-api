@@ -19,3 +19,31 @@ def open_and_load_config():
 @route('/')
 def hello():
     return "Plex API"
+
+@route('/<key>/reboot')
+def pull(key):
+    if (key != config["key"]):
+        return "ko"
+    os.chdir(config["path"]);
+    subprocess.call(["/sbin/reboot"])
+    return "ok"
+
+@route('/<key>/restart')
+def pull(key):
+    if (key != config["key"]):
+        return "ko"
+    os.chdir(config["path"]);
+    subprocess.call(["/usr/sbin/service", "plexmediaserver", "restart"])
+    return "ok"
+
+@route('/<key>/update')
+def pull(key):
+    if (key != config["key"]):
+        return "ko"
+    os.chdir(config["path"]);
+    subprocess.call(["/bin/sh", "update.sh"])
+    return "ok"
+
+if __name__ == "__main__":
+    config = open_and_load_config()
+    run(host=config["host"], port=config["port"], debug=config["debug"])
